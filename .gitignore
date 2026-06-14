@@ -6,9 +6,6 @@ build/
 # Dependencies
 node_modules/
 
-# Generated frames (large binary files — regénérés par ffmpeg)
-public/frames/
-
 # Env
 .env
 .env.local
