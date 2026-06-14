@@ -2,12 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "../context/LangContext";
+import { t } from "../i18n";
 
-// ─── CONFIGURE THIS AFTER HIGGSFIELD GENERATION ───────────────────────────
-// Replace with the actual frame count from your extracted frames.
-// Run: ls public/frames/*.jpg | wc -l
 const FRAME_COUNT = 241;
-// ──────────────────────────────────────────────────────────────────────────
 
 function getFrameSrc(index: number): string {
   const padded = String(index + 1).padStart(4, "0");
@@ -15,6 +13,9 @@ function getFrameSrc(index: number): string {
 }
 
 export default function ScrollHero() {
+  const { lang } = useLang();
+  const T = t[lang].hero;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -62,7 +63,6 @@ export default function ScrollHero() {
       currentIdxRef.current = index;
     }
 
-    // Preload all frames
     const images: HTMLImageElement[] = [];
     let loadedCount = 0;
 
@@ -72,7 +72,6 @@ export default function ScrollHero() {
       img.onload = () => {
         loadedCount++;
         if (loadedCount === 1) {
-          // Draw first loaded frame immediately
           resizeCanvas();
           drawFrame(0);
         }
@@ -81,7 +80,6 @@ export default function ScrollHero() {
     }
     imagesRef.current = images;
 
-    // rAF loop — no scroll event listener
     function tick() {
       if (container) {
         const rect = container.getBoundingClientRect();
@@ -98,7 +96,6 @@ export default function ScrollHero() {
     }
     rafRef.current = requestAnimationFrame(tick);
 
-    // Resize handler
     const handleResize = () => resizeCanvas();
     window.addEventListener("resize", handleResize);
     resizeCanvas();
@@ -114,141 +111,47 @@ export default function ScrollHero() {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        delay: 0.8 + i * 0.12,
-        duration: 0.7,
-        ease: [0.25, 0, 0, 1],
-      },
+      transition: { delay: 0.8 + i * 0.12, duration: 0.7, ease: [0.25, 0, 0, 1] },
     }),
   };
 
   return (
-    <div
-      ref={containerRef}
-      style={{ height: "300vh", position: "relative" }}
-    >
-      {/* Sticky viewport */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          width: "100vw",
-          height: "100vh",
-          overflow: "hidden",
-          background: "#000",
-        }}
-      >
-        {/* Canvas */}
-        <canvas
-          ref={canvasRef}
-          style={{
-            display: "block",
-            width: "100%",
-            height: "100%",
-          }}
-        />
-
-        {/* Overlay */}
+    <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
+      <div style={{ position: "sticky", top: 0, width: "100vw", height: "100vh", overflow: "hidden", background: "#000" }}>
+        <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            padding: "clamp(2rem, 5vw, 5rem)",
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)",
+            position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+            justifyContent: "flex-end", padding: "clamp(2rem, 5vw, 5rem)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)",
             pointerEvents: "none",
           }}
         >
-          <motion.span
-            custom={0}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "0.65rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#C8A96E",
-              marginBottom: "1rem",
-              display: "block",
-            }}
+          <motion.span custom={0} variants={fadeUp} initial="hidden" animate="visible"
+            style={{ fontFamily: "var(--font-inter)", fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#C8A96E", marginBottom: "1rem", display: "block" }}
           >
-            Est. 1905 · Geneva
+            {T.eyebrow}
           </motion.span>
 
-          <motion.h1
-            custom={1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontWeight: 400,
-              fontSize: "clamp(2.4rem, 6vw, 5.5rem)",
-              lineHeight: 1.08,
-              letterSpacing: "-0.01em",
-              marginBottom: "1.25rem",
-              maxWidth: "12ch",
-            }}
+          <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="visible"
+            style={{ fontFamily: "var(--font-playfair)", fontWeight: 400, fontSize: "clamp(2.4rem, 6vw, 5.5rem)", lineHeight: 1.08, letterSpacing: "-0.01em", marginBottom: "1.25rem", maxWidth: "12ch" }}
           >
-            Day-Date 40
+            {T.title}
           </motion.h1>
 
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontWeight: 300,
-              fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)",
-              color: "#E5E5E5",
-              maxWidth: "460px",
-              lineHeight: 1.65,
-              marginBottom: "2rem",
-            }}
+          <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)", color: "#E5E5E5", maxWidth: "460px", lineHeight: 1.65, marginBottom: "2rem" }}
           >
-            The first wristwatch to display the day of the week spelled out in
-            full — worn by those who shape the course of history.
+            {T.body}
           </motion.p>
 
-          <motion.div
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            style={{ pointerEvents: "auto" }}
-          >
-            <a
-              href="#features"
-              style={{
-                display: "inline-block",
-                background: "#C8A96E",
-                color: "#000",
-                fontFamily: "var(--font-inter)",
-                fontWeight: 500,
-                fontSize: "0.7rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                padding: "0.9rem 2.6rem",
-                transition: "background 0.2s ease, color 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background =
-                  "#E8C98E";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background =
-                  "#C8A96E";
-              }}
+          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" style={{ pointerEvents: "auto" }}>
+            <a href="#features"
+              style={{ display: "inline-block", background: "#C8A96E", color: "#000", fontFamily: "var(--font-inter)", fontWeight: 500, fontSize: "0.7rem", letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", padding: "0.9rem 2.6rem", transition: "background 0.2s ease, color 0.2s ease" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#E8C98E"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#C8A96E"; }}
             >
-              Explore Collection
+              {T.cta}
             </a>
           </motion.div>
         </div>
