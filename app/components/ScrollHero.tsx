@@ -21,7 +21,7 @@ export default function ScrollHero() {
       <div
         style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)",
+          background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%)",
           pointerEvents: "none",
         }}
       />
