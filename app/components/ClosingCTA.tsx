@@ -12,7 +12,7 @@ export default function ClosingCTA() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section ref={ref} style={{ background: "#000", padding: "clamp(6rem, 12vw, 11rem) clamp(1.5rem, 6vw, 6rem)", textAlign: "center", borderTop: "1px solid rgba(200,169,110,0.1)", position: "relative", overflow: "hidden" }}>
+    <section ref={ref} style={{ background: "transparent", padding: "clamp(6rem, 12vw, 11rem) clamp(1.5rem, 6vw, 6rem)", textAlign: "center", borderTop: "1px solid rgba(200,169,110,0.1)", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 70%, rgba(200,169,110,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div style={{ position: "relative", zIndex: 1 }}>

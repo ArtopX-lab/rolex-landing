@@ -21,7 +21,7 @@ export default function FeaturesSection() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section id="features" ref={ref} style={{ background: "#000", padding: "clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem)" }}>
+    <section id="features" ref={ref} style={{ background: "transparent", padding: "clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem)" }}>
       <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] }} style={{ marginBottom: "4rem" }}>
         <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#C8A96E", display: "block", marginBottom: "1.25rem" }}>
           {T.eyebrow}

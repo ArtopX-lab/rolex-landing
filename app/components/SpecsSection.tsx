@@ -12,7 +12,7 @@ export default function SpecsSection() {
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <section ref={ref} style={{ background: "#000", padding: "clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem)", borderTop: "1px solid rgba(200,169,110,0.1)" }}>
+    <section ref={ref} style={{ background: "transparent", padding: "clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem)", borderTop: "1px solid rgba(200,169,110,0.1)" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] }} style={{ marginBottom: "3.5rem" }}>
           <span style={{ fontFamily: "var(--font-inter)", fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#C8A96E", display: "block", marginBottom: "1.25rem" }}>
