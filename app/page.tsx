@@ -13,7 +13,7 @@ export default function Home() {
     <LangProvider>
       <ReverseCanvas />
       <Navbar />
-      <main style={{ background: "#000" }}>
+      <main>
         <ScrollHero />
         <div style={{ position: "relative", zIndex: 1 }}>
           <FeaturesSection />
