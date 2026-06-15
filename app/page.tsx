@@ -13,13 +13,11 @@ export default function Home() {
     <LangProvider>
       <AnimatedCanvas />
       <Navbar />
-      <main>
+      <main style={{ position: "relative", zIndex: 1 }}>
         <ScrollHero />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <FeaturesSection />
-          <SpecsSection />
-          <ClosingCTA />
-        </div>
+        <FeaturesSection />
+        <SpecsSection />
+        <ClosingCTA />
       </main>
     </LangProvider>
   );
