@@ -2,8 +2,8 @@
 
 import { LangProvider } from "./context/LangContext";
 import Navbar from "./components/Navbar";
+import AnimatedCanvas from "./components/AnimatedCanvas";
 import ScrollHero from "./components/ScrollHero";
-import ReverseCanvas from "./components/ReverseCanvas";
 import FeaturesSection from "./components/FeaturesSection";
 import SpecsSection from "./components/SpecsSection";
 import ClosingCTA from "./components/ClosingCTA";
@@ -11,7 +11,7 @@ import ClosingCTA from "./components/ClosingCTA";
 export default function Home() {
   return (
     <LangProvider>
-      <ReverseCanvas />
+      <AnimatedCanvas />
       <Navbar />
       <main>
         <ScrollHero />
